@@ -1,7 +1,13 @@
 const app = require('./app')
 const dotenv = require('dotenv')
 const connectDatabase = require ("./config/database")
-const error = require('./Middleware/error')
+// const error = require('./Middleware/error')
+
+process.on('uncaughtException',(err)=>{
+    console.log(`error:${err.message}`)
+    console.log('shut down the server due uncaught error')
+    process.exit(1)
+})
 
 // configration 
 dotenv.config({path:"backend/config/config.env"})
