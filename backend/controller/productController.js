@@ -11,17 +11,6 @@ exports.createProduct = tryCatcherror(async (req, res, next) => {
 })
 })
 
-// exports.findProduct = async (req, res, next) => {
-  // const findProduct = await Product.find(req.params.id)
-  // console.log(req.params.id)
-  // // if(!findProduct){
-  // //   return next(new CatchError('Product not found',404))
-  // // }
-  // res.status(200).json({
-  //   success:true,
-  //   findProduct
-  // })
-// }
 exports.findAllProduct=tryCatcherror(async(req,res)=>{
   const product = await Product.find()
   res.status(200).json({

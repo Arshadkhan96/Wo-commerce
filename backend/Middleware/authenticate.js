@@ -17,7 +17,7 @@ exports.isAuthenticated = tryCatcherror(async (req, res, next) => {
 exports.authorizeRoles = (...roles)=>{
     return (req,res,next)=>{
         if(!roles.includes(req.user.role)){
-            return next(new CatchError(`Role:${req.user.role} not allowed to access`))
+            return next(new CatchError(`Role:${req.user.role} not allowed to access`,403))
         }
         next()
     }

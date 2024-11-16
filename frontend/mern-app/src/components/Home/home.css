@@ -1,0 +1,85 @@
+.banner{
+    background-image: linear-gradient(to right,#deeaf9,#5ca3f5);
+    height:100vmin;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.banner>h1{
+    margin: 5vmax;
+    font:600 2.5vmax "Roboto";
+    font-family: sans-serif;
+}
+.banner>p{
+    margin-top: 5vmax;
+    font:300 1.4vmax "Roboto";
+    font-family: sans-serif;
+}
+.banner>a>button{
+    margin-bottom: 5vmax;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 0;
+    padding: 1vmax;
+    transition:all 0.5;
+    width:9vmax;
+    font:500 1vmax "Roboto";
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.banner>a>button:hover{
+    background-color: black;
+    color:white
+}
+.banner::after{
+    content: "";
+    width:100vw;
+    height: 100vmin;
+    background-color: #ffffff;
+    /* position: absolute; */
+    top:0%;
+    left:0;
+    max-width: 100%;
+    clip-path: polygon(100% 64%, 0% 100%, 100% 100%);
+}
+.home-Heading{
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 1.4vmax;
+    border-bottom: 1px solid black;
+    width:20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+    color: rgb(0,0,0,0.7);
+}
+
+
+/* Product.jsx */
+.product-card{
+    width:15vmax ;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color:darkblue;
+    transition: all 0.5s;
+    margin: 2vmax;
+    padding: 5max 0.5;
+    text-align: center;
+    border: 1px solid rgb(0,0,0,0.7);
+    border-radius: 10px;
+    padding: 1vmax;
+    height: 50vh;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+.stars{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:5px
+}

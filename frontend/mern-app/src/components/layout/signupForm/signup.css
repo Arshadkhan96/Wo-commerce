@@ -1,0 +1,61 @@
+.formInputSign {
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    height: 65vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formSign {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.formSign > p {
+    font-family: sans-serif;
+}
+
+.formSign > input {
+    width: 100%;
+    height: 5vh;
+    font-size: 1rem;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.formSign > label {
+    font-size: 1rem;
+    font-family: sans-serif;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.formSign > button {
+    width: 100%;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.formSign > button:hover {
+    background-color: #45a049;
+}
+
+.formSign > h4 {
+    margin-top: 15px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+

@@ -1,0 +1,129 @@
+/* Navbar Container */
+.navbar {
+    width: 100%;
+    height: 80px;
+    background-color: #020024;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo Section */
+.logo {
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.logo > h1 {
+    font-size: 2.2rem;
+}
+
+.cart {
+    height: 5vh;
+    width: 3vh;
+    margin-right: 10px;
+    color: white;
+}
+
+/* Navigation Links */
+.navname {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.heading {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.heading:hover {
+    color: lightblue;
+    text-decoration: underline;
+}
+
+/* Search Box */
+.searchbox {
+    width: 25%;
+    max-width: 300px;
+    height: 35px;
+    outline: none;
+    padding-left: 15px;
+    font-size: large;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Button Links */
+.btn {
+    text-decoration: none;
+    color: darkblue;
+    background-color: lightblue;
+    transition: all 0.3s ease-in-out;
+    height: 35px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: #0099cc;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; 
+        align-items: center;
+        padding: 10px;
+        height: auto; /* Adjust height for content */
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px; 
+        gap: 10px; 
+    }
+
+    .cart {
+        width: 25px; /* Adjusted size for better visibility on smaller screens */
+        height: 25px;
+    }
+
+    .navname {
+        width: 100%;
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+        justify-content: center;
+        gap: 15px; /* Space between links */
+        margin-bottom: 10px;
+    }
+
+    .navname > h3 {
+        margin: 0; /* Remove extra margin */
+    }
+
+    .btn {
+        width: 70%; /* Adjust button width for smaller screens */
+        max-width: 200px;
+        margin-bottom: 15px;
+    }
+
+    .searchbox {
+        width: 90%; 
+        max-width: 350px;
+        margin-bottom: 15px; 
+    }
+}

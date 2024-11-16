@@ -4,6 +4,7 @@ const CatchError = require('../resources/catcherror')
 const tryCatcherror = require('../Middleware/tryCatcherror')
 const sendToken = require("../resources/token")
 const sendEmail = require("../resources/sendEmail")
+const crypto = require('crypto')
 
 exports.registerUser = tryCatcherror(async (req, res, next) => {
     const { name, email, password } = req.body;
@@ -14,7 +15,6 @@ exports.registerUser = tryCatcherror(async (req, res, next) => {
             url: "sample profile url"
         }
     });
-
     sendToken(user, 201, res)
 })
 
@@ -45,8 +45,12 @@ exports.loginUser = tryCatcherror(async (req, res, next) => {
 
 
 exports.logoutUser = tryCatcherror(async (req, res, next) => {
-    res.cookie("token", null, { expires: new Date(Date.now()) })
-    sendToken(user, 200, res)
+    res.cookie("token", null, { expires: new Date(Date.now()),httpOnly: true })
+    res.status(200).json({
+        success: true,
+        message: 'Logged out successfully',
+      });
+    
 })
 
 exports.forgetPassword = tryCatcherror(async(req,res,next)=>{
@@ -78,3 +82,118 @@ exports.forgetPassword = tryCatcherror(async(req,res,next)=>{
     }
 })
 
+
+exports.getResetPassword = tryCatcherror(async function(req,res,next){
+    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire:{$gt: Date.now()}
+    })
+    if (!user) {
+        return next(new CatchError("Reset Password token is invalid or expire", 400));
+    }  
+    if (req.body.password !== req.body.confirmPassword) {
+        return next(new CatchError("Password doesn't match to Confirm Password", 400));
+    }  
+    user.password = req.body.password
+    user.resetPasswordToken = undefined
+    user.resetPasswordExpire = undefined
+
+    console.log(req.params.token)
+    
+    await user.save()
+    sendToken(user, 200, res)
+})
+
+exports.getUserDetails = tryCatcherror(async (req,res,next)=>{
+    const user = await User.findById(req.user.id)
+    console.log(user)
+    res.status(200).json({
+      success:true,
+      user
+    })
+    })
+
+
+exports.updatePassword=tryCatcherror(async(req,res,next)=>{
+    const user = await User.findById(req.user.id).select("+password")
+    const isPasswordMatch = await user.comparePassword(req.body.oldPassword)
+    if(!isPasswordMatch){
+        return next(new CatchError("Old Password is incorrect",400))
+    } 
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(new CatchError("Password does not match",400))
+    }
+    user.password=req.body.newPassword
+    await user.save()
+    sendToken(user, 200, res)
+})
+
+exports.updateProfile=tryCatcherror(async(req,res,next)=>{
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email
+    }
+    // We will add cloudinary later 
+
+    const user = await User.findByIdAndUpdate(req.user.id,newUserData, {
+        new:true,
+        runValidators:true,
+        useFindAndModify:false
+    })
+    
+    res.status(200).json({
+        success: true,
+    });
+})
+
+// ################### admin level api ##################################
+
+exports.getAllUsers = tryCatcherror(async(req,res,next)=>{
+    const users = await User.find()
+    res.status(200).json({
+        success:true,
+        users
+    })
+})
+
+exports.singleUserDetails = tryCatcherror(async(req, res,next) => {
+    const user=await User.findById(req.params.id)
+    if(!user){
+      return next(new CatchError("user not found",404))
+    }
+    res.status(200).json({
+      success:true,
+      user
+    })
+  })  
+
+exports.deleteUser = tryCatcherror(async(req,res,next)=>{
+    const user=await User.findById(req.params.id)
+    if(!user){
+        return next(new CatchError("user not found",404))
+    }
+    await user.remove()
+    res.status(200).json({
+        success:true
+    })
+})
+
+
+exports.updateUserRole=tryCatcherror(async(req,res,next)=>{
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+        role:req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(req.user.id,newUserData, {
+        new:true,
+        runValidators:true,
+        useFindAndModify:false
+    })
+    
+    res.status(200).json({
+        success: true,
+    });
+})
