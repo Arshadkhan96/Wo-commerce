@@ -7,9 +7,9 @@ const sendEmail = require("../resources/sendEmail")
 const crypto = require('crypto')
 
 exports.registerUser = tryCatcherror(async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, password,role } = req.body;
     const user = await User.create({
-        name, email, password,
+        name, email, password,role,
         avatar: {
             public_id: "sample id",
             url: "sample profile url"
@@ -173,7 +173,7 @@ exports.deleteUser = tryCatcherror(async(req,res,next)=>{
     if(!user){
         return next(new CatchError("user not found",404))
     }
-    await user.remove()
+    await user.deleteOne()
     res.status(200).json({
         success:true
     })
