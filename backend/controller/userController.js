@@ -156,7 +156,7 @@ exports.getAllUsers = tryCatcherror(async(req,res,next)=>{
         users
     })
 })
-
+// singleUserDetails
 exports.singleUserDetails = tryCatcherror(async(req, res,next) => {
     const user=await User.findById(req.params.id)
     if(!user){
@@ -168,6 +168,7 @@ exports.singleUserDetails = tryCatcherror(async(req, res,next) => {
     })
   })  
 
+//   deleteUser
 exports.deleteUser = tryCatcherror(async(req,res,next)=>{
     const user=await User.findById(req.params.id)
     if(!user){
@@ -179,7 +180,7 @@ exports.deleteUser = tryCatcherror(async(req,res,next)=>{
     })
 })
 
-
+// UpdateUserRole
 exports.updateUserRole=tryCatcherror(async(req,res,next)=>{
     const newUserData = {
         name:req.body.name,
@@ -197,3 +198,4 @@ exports.updateUserRole=tryCatcherror(async(req,res,next)=>{
         success: true,
     });
 })
+

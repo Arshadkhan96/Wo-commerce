@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      {/* <Navigation/>
+      <Navigation/>
       <br />
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -26,7 +26,7 @@ function App() {
         <Route path='/reset' element={<ForgotPassword/>}/>
       </Routes>
       <br />
-      <Footer/> */}
+      <Footer/>
 
       {/* <Testing/> */}
       <br/>

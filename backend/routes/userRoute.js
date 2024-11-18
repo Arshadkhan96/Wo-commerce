@@ -19,4 +19,7 @@ router.route("/admin/user/:id").get(isAuthenticated,authorizeRoles("admin"),sing
 .delete(isAuthenticated,authorizeRoles("admin"),deleteUser)
 
 
+
+
+
 module.exports=router;
