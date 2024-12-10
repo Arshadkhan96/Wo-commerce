@@ -1,18 +1,19 @@
 const Product = require("../models/productModel")
 const CatchError = require("../resources/catcherror")
-const tryCatcherror=require('../Middleware/tryCatcherror')
+const tryCatcherror = require('../Middleware/tryCatcherror')
+const ApiFeatures =  require("../resources/apiFeatures")
 
 exports.createProduct = tryCatcherror(async (req, res, next) => {
   const product = await Product.create(req.body)
-  
   res.status(201).json({
     success: true,
     product
 })
 })
 
-exports.findAllProduct=tryCatcherror(async(req,res)=>{
-  const product = await Product.find()
+exports.findAllProduct = tryCatcherror(async (req, res) => {
+  const apiFeatures = new ApiFeatures(Product.find(),req.query).search();
+  const product = await apiFeatures.query;
   res.status(200).json({
     success:true,
     product
@@ -58,67 +59,6 @@ exports.findProduct = tryCatcherror(async(req, res,next) => {
 })
 
 
-//  create new Review => /api/v1/review
-
-// exports.productReview = tryCatcherror(async (req, res, next) => {
-//   const { rating, comment, productId } = req.body;
-
-//   console.log("Request Body:", req.body);
-
-//   // Validate productId
-//   const mongoose = require("mongoose");
-//   if (!mongoose.Types.ObjectId.isValid(productId)) {
-//     return next(new CatchError("Invalid Product ID", 400));
-//   }
-
-//   // Find the product
-//   const product = await Product.findById(productId);
-//   console.log("Product Found:", product);
-
-//   if (!product) {
-//     return next(new CatchError("Product not found", 404));
-//   }
-
-//   // Create a review object
-//   const review = {
-//     user: req.user._id,
-//     name: req.user.name,
-//     rating: Number(rating),
-//     comment,
-//   };
-
-//   // Check if the user already reviewed this product
-//   const isReviewed = product.reviews.find(
-//     (rev) => rev.user.toString() === req.user._id.toString()
-//   );
-
-//   if (isReviewed) {
-//     // Update the review
-//     product.reviews.forEach((rev) => {
-//       if (rev.user.toString() === req.user._id.toString()) {
-//         rev.rating = rating;
-//         rev.comment = comment;
-//       }
-//     });
-//   } else {
-//     // Add a new review
-//     product.reviews.push(review);
-//     product.numberOfReviews = product.reviews.length;
-//   }
-
-//   // Calculate the average rating
-//   const totalRatings = product.reviews.reduce((sum, rev) => sum + rev.rating, 0);
-//   product.ratings = totalRatings / product.reviews.length;
-
-//   // Save the product
-//   await product.save({ validateBeforeSave: false });
-
-//   // Respond with success
-//   res.status(200).json({
-//     success: true,
-//     message: "Review added successfully",
-//   });
-// });
 
 ///////////////////new apne wali////
 
@@ -179,5 +119,27 @@ await product.save({
     message:"Review added successfully"
   });
 
- 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
