@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.route("/products/:id").get(findProduct)
 router.route("/products/create").post(createProduct)
-router.route("/products").get(findAllProduct) //authorizeRoles
+router.route("/products").get(findAllProduct)
 router.route("/products/update/:_id").put(updateProduct)
 router.route("/products/delete/:_id").delete(deleteProduct)
 router.route("/review").put(isAuthenticated, productReview )

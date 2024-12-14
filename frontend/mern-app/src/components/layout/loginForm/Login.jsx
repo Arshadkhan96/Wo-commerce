@@ -1,46 +1,81 @@
-import React from 'react'
-import { useState } from 'react'
-import './login.css'
-const Login=()=>{
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
-    const [error,setError]=useState('')
-    const handleSubmit=(e)=>{
-        e.preventDefault()
+import React, { useState } from "react";
 
-        if(!email || !password){
-            setError('Please fill in the required fields')
-        }else{
-            setError('')
-            setEmail('')
-            setPassword('')
-        }
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Login failed");
+      }
+
+      const data = await response.json();
+      console.log("Login Successful:", data);
+      setFormData({ email: "", password: "" });
+
+      // Store the token (if included in response) for further authentication
+      if (data.token) {
+        localStorage.setItem("authToken", data.token);
+      }
+    } catch (err) {
+      console.error("Error logging in:", err.message);
     }
+  };
 
-    return(
-        <>
-        <div className='formInput'>
-            <form onSubmit={handleSubmit} className='form'>
-                <p>Login to your Account</p>
-                <br />
-                <label htmlFor="">E-mail:</label>
-                <input type="email" placeholder="example@gmail.com" onChange={(e)=>setEmail(e.target.value)} value={email} required/>
-
-                <br />
-
-                <label htmlFor="">Password:</label>
-                <input type="password" placeholder="**********" onChange={(e)=>setPassword(e.target.value)} value={password} required/>
-
-                <br />
-
-                <button type='submit'>Login</button>
-
-                <br /><br />
-                <p><a href="/reset">Forgot password</a></p>
-                <h4>Not have an account? / <a href="/signup">SignUp</a></h4>
-            </form>
+  return (
+    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
-        </>
-    )
-}
-export default Login
+        <div>
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
+
+export default Login;

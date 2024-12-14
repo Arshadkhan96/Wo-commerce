@@ -25,11 +25,11 @@ const productSchema = new mongoose.Schema({
          {
             public_id:{
                 type:String,
-                required:true
+                // required:true
             },
             url:{
                 type:String,
-                required:true
+                // required:true
             }
          }
     ],
@@ -55,19 +55,19 @@ const productSchema = new mongoose.Schema({
             user:{
                 type:mongoose.Schema.ObjectId,
                 ref:"User",
-                required:true
+                // required:true
             },
             name:{
                 type:String,
-                required:true
+                // required:true
             },
             rating:{
                 type:Number,
-                required:true
+                // required:true
             },
             comment:{
                 type:String,
-                required:true
+                // required:true
             }
         }
      ]

@@ -1,74 +1,118 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import './signup.css';
+import React, { useState } from "react";
 
-const SignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+const RegisterForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "", // Optional field
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
-      setError('Please fill in the required fields');
-    } else {
-      setError('');
-      setName('');
-      setEmail('');
-      setPassword('');
-    }
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    axios.post('http://localhost:5000/api/v1/register',{name,email,password})
-    .then(result=>console.log(result))
-    .catch(err=>console.log(err))
+      if (!response.ok) {
+        throw new Error("Failed to register user");
+      }
+
+      const data = await response.json();
+      console.log("Registration Successful:", data);
+      setSuccess("User registered successfully!");
+      setError("");
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
+      });
+    } catch (err) {
+      console.error("Error registering user:", err);
+      setError("Failed to register user. Please try again.");
+      setSuccess("");
+    }
   };
 
   return (
-    <>
-      <div className='formInputSign'>
-        <form onSubmit={handleSubmit} className='formSign'>
-          <p>Sign Up to your Account</p>
-          {error && <p className="error">{error}</p>}
-          <br />
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            required
-          />
-          <br />
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="example@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            required
-          />
-          <br />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="**********"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            required
-          />
-          <br />
-          <button type="submit">Signup</button>
-          <br /><br />
-          <h4>Have an account? / <a href="/login">Login</a></h4>
-        </form>
-      </div>
-    </>
+    <div>
+      <h1>Register User</h1>
+      <form onSubmit={handleSubmit}>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && <p style={{ color: "green" }}>{success}</p>}
+
+        <div>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Role (Optional):
+            <input
+              type="text"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 };
 
-export default SignUp;
+export default RegisterForm;

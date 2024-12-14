@@ -9,8 +9,8 @@ import Home from './components/Home/Home'
 import Products from './components/Home/Product'
 import Footer from './components/layout/footer/Footer'
 
-import Testing from './components/layout/testingPost'
-import ProductList from './components/layout/testingGet'
+// import Testing from './components/layout/testingPost'
+// import ProductList from './components/layout/testingGet'
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
 
       {/* <Testing/> */}
       <br/>
-      <ProductList/>
+      {/* <ProductList/> */}
   
     </>
   )
