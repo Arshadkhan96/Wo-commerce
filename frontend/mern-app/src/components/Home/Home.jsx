@@ -1,56 +1,24 @@
-import  { useEffect } from "react";
-import './home.css'
-import Products from "./Product";
-import { CiDesktopMouse1 } from "react-icons/ci";
-import { getAllProducts } from "../../action/productAction.js"
+import { Fragment, useEffect } from "react";
+import "./home.css";
+import Product from "./Product";
+// import { CiDesktopMouse1, CiHospital1 } from "react-icons/ci";
+import { getProduct } from "../../action/productAction.js";
 import { useSelector, useDispatch } from "react-redux";
 
-const products={
-    name:'Mobile (Infinix GT pro)',
-    price:24999,
-    id:'#125355',
-    image:[{url:"https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/e/q/0/gt-20-pro-x6871-infinix-original-imahf2dfvbtavfur.jpeg?q=70"}]
-}
-
-
-
-
-
 const Home = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => {
+    console.log("component state", state.products.product);
+    return state.products;
+  });
 
-  useEffect((
-    dispatch(getAllProducts())
-  ), [dispatch])
-    console.log(getAllProducts());
-  
-    return (
-      <>
-        <div className="banner">
-          <p>Welcome to our site</p>
-          <h1>Find amazing products</h1>
-          <a href="#container">
-            <button>
-              Scroll
-              <CiDesktopMouse1 />
-            </button>
-          </a>
-        </div>
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
 
-        <h2 className="home-Heading">Latest Products</h2>
-        <div className="container" id="container">
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-          <Products products={products} />
-        </div>
-      </>
-    );
-}
-export default Home
+  // console.log("home", products);
+  return (
+   <h1>hello</h1>
+  );
+};
+export default Home;
