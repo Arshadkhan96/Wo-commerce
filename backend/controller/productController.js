@@ -3,6 +3,7 @@ const CatchError = require("../resources/catcherror");
 const tryCatcherror = require("../Middleware/tryCatcherror");
 const ApiFeatures = require("../resources/apiFeatures");
 
+
 exports.createProduct = tryCatcherror(async (req, res, next) => {
   const product = await Product.create(req.body);
   res.status(201).json({
@@ -27,7 +28,7 @@ exports.findAllProduct = tryCatcherror(async (req, res) => {
 });
 
 exports.updateProduct = tryCatcherror(async (req, res, next) => {
-  const updateProduct = await Product.updateOne(req.params, {
+  const updateProduct = await Product.updateMany(req.params, {
     $set: req.body,
   });
   if (!updateProduct) {
@@ -60,6 +61,8 @@ exports.findProduct = tryCatcherror(async (req, res, next) => {
     product,
   });
 });
+
+
 
 ///////////////////new apne wali////
 

@@ -1,4 +1,4 @@
-.formInputSign {
+/* .Signup {
     width: 80%;
     max-width: 400px;
     margin: auto;
@@ -58,4 +58,99 @@
     margin-top: 15px;
     font-family: "Lucida Console", "Courier New", monospace;
 }
+ 
 
+ 
+/* Signup Container */
+
+  
+  /* Signup Container */
+  /* Signup.css */
+
+/* Overall container */
+/* Signup Container */
+.Signup {
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    height: 65vh;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* Form Heading */
+  .Signup h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Labels */
+  .Signup label {
+    font-size: 1rem;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Form Inputs */
+  .Signup input {
+    width: 100%;
+    height: 40px;
+    font-size: 1rem;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  /* Add outline effect on hover */
+  .Signup input:focus {
+    border-color: #74b9ff;
+    outline: none;
+  }
+  
+  /* Error and Success Messages */
+  .Signup p {
+    font-size: 0.9rem;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .Signup p[style*="red"] {
+    color: #ff4d4d;
+  }
+  
+  .Signup p[style*="green"] {
+    color: #4caf50;
+  }
+  
+  /* Submit Button */
+  .Signup button {
+    width: 100%;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color:  #0984e3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Signup button:hover {
+    background-color: #74b9ff;
+  }
+  
+  .Signup button:disabled {
+    background-color: #b2bec3;
+    cursor: not-allowed;
+  }
+  

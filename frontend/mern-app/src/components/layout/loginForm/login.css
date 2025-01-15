@@ -1,62 +1,77 @@
-.formInput {
-    width: 80%;
+/* login.css */
+.container {
     max-width: 400px;
-    margin: auto;
-    height: 53vh;
-    border: 1px solid black;
-    border-radius: 10px;
+    margin: 50px auto;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+    /* background-color: #ffffffdb; */
+    background-color: #f9f9f9;
 
-.form {
+    border-radius: 10px;
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Heading styles */
+  .container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #2d3436;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Error message */
+  .container p {
+    color: #d63031;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* Form and inputs */
+  .container form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.form > p {
-    font-family: sans-serif;
-}
-
-.form > input {
-    width: 100%;
-    height: 5vh;
+  }
+  
+  .container label {
+    margin-bottom: 0.5rem;
     font-size: 1rem;
-    padding-left: 10px;
-    margin-bottom: 10px;
+    color: #2d3436;
+  }
+  
+  .container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #dfe6e9;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .container input:focus {
+    border-color: #74b9ff;
     outline: none;
-}
-
-.form > label {
-    font-size: 1rem;
-    font-family: sans-serif;
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.form > button {
-    width: 100%;
-    height: 40px;
-    font-size: 1rem;
-    border-radius: 5px;
-    background-color: #4CAF50;
+  }
+  
+  /* Button styles */
+  .container button {
+    background-color: #0984e3;
     color: white;
+    font-size: 1rem;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-}
-
-.form > button:hover {
-    background-color: #45a049;
-}
-
-.form > h4 {
-    margin-top: 15px;
-    font-family: "Lucida Console", "Courier New", monospace;
-}
-
-
+    transition: background-color 0.3s ease;
+  }
+  
+  .container button:hover {
+    background-color: #74b9ff;
+  }
+  
+  .container button:disabled {
+    background-color: #b2bec3;
+    cursor: not-allowed;
+  }
+  

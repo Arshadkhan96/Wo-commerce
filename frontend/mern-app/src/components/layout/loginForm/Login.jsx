@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../action/userAction";
+import "./login.css"
+import { Helmet } from "react-helmet";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user); // Access loading and error from Redux store
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,67 +20,51 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:5000/api/v1/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Login failed");
-      }
-
-      const data = await response.json();
-      console.log("Login Successful:", data);
-      setFormData({ email: "", password: "" });
-
-      // Store the token (if included in response) for further authentication
-      if (data.token) {
-        localStorage.setItem("authToken", data.token);
-      }
-    } catch (err) {
-      console.error("Error logging in:", err.message);
-    }
+    dispatch(loginUser(formData)); // Dispatch the Redux action
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <>
+      <Helmet>
+        <title>Login Page</title>
+        <meta name="login" content="User login" />
+      </Helmet>
+      <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}className="container">
+        <h1>Login</h1>
+        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error if any */}
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              Password:
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,29 @@
+ .productDetail{
+  /* width: 100vh;
+  max-width: 100%;
+  padding: 6vmax;
+  box-sizing: border-box;
+  /* background-color: #9f8585; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #4e3030;
+
+}
+
+.productDetail > div{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2vmax;
+  box-sizing: border-box;
+  align-items: center;
+  border: 1px solid #ffff;
+} 
+ 
+
+/* General styles */

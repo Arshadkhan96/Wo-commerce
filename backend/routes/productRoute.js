@@ -10,8 +10,7 @@ const {
 const {isAuthenticated} = require('../Middleware/authenticate')
 
 const router = express.Router();
-
-router.route("/products/:id").get(findProduct)
+router.route("/product/:id").get(findProduct)
 router.route("/products/create").post(createProduct)
 router.route("/products").get(findAllProduct)
 router.route("/products/update/:_id").put(updateProduct)

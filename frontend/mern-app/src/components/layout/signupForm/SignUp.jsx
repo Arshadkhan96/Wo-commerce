@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../../action/userAction";
+import "./signup.css"
+import { Helmet } from "react-helmet";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user); // Redux state for error/loading
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     role: "", // Optional field
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+
+  const [success, setSuccess] = useState(""); // Local success message
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,41 +25,30 @@ const RegisterForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:5000/api/v1/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    setSuccess(""); // Reset success message on new submission
+    dispatch(registerUser(formData)) // Dispatch Redux action
+      .then(() => {
+        setSuccess("User registered successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          role: "",
+        });
+      })
+      .catch((err) => {
+        console.error(err); // Log error for debugging
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to register user");
-      }
-
-      const data = await response.json();
-      console.log("Registration Successful:", data);
-      setSuccess("User registered successfully!");
-      setError("");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        role: "",
-      });
-    } catch (err) {
-      console.error("Error registering user:", err);
-      setError("Failed to register user. Please try again.");
-      setSuccess("");
-    }
   };
 
   return (
-    <div>
+    <div className="Signup">
+      <Helmet>
+        <title>Register User</title>
+        <meta name="register" content="Register new user" />
+      </Helmet>
       <h1>Register User</h1>
       <form onSubmit={handleSubmit}>
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -109,7 +105,9 @@ const RegisterForm = () => {
           </label>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Registering..." : "Register"}
+        </button>
       </form>
     </div>
   );
