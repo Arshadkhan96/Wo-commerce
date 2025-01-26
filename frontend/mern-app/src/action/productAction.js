@@ -18,12 +18,13 @@ import {
   PRODUCT_UPDATE_FAIL,
 } from "../constants/productConstant.js";
 
-export const getProduct = () => async (dispatch) => {
+//PRODUCT DETAIL API
+export const getProduct = (category = '',currentPage=1) => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
-
-    const { data } = await axios.get("http://localhost:5000/api/v1/products");
-    console.log(data,"action data")
+    // let link = `http://localhost:5000/api/v1/products?page=${currentPage=1}`
+    let link = `http://localhost:5000/api/v1/products?category=audio&page=${category,currentPage=1}`
+    const { data } = await axios.get(link);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
@@ -37,8 +38,6 @@ export const getProduct = () => async (dispatch) => {
 };
 
 
-
-//PRODUCT DETAIL API
 
 export const getProductDetail = (id) => async (dispatch) => {
   try {

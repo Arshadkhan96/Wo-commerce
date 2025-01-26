@@ -9,17 +9,16 @@ import './ProductDetail.css';
 
 
 const ProductDetail = () => {
-  const { id } = useParams(); // Extract the product ID from the URL using useParams
+  const { id } = useParams(); 
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state) => state.productDetails || {});
 
   useEffect(() => {
     if (id) {
-      dispatch(getProductDetail(id)); // Dispatch action to get product details based on ID
+      dispatch(getProductDetail(id));
     }
-  }, [dispatch, id]); // Dependency array ensures it runs when id or dispatch changes
+  }, [dispatch, id]); 
 
-  console.log("product detail component", product)
 
   return (
     <Fragment>
