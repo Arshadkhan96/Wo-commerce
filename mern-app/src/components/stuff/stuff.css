@@ -1,0 +1,43 @@
+.formInputForgot {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9; 
+    font-family: sans-serif;
+  }
+  
+  .formForgot {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formForgot > input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .formForgot>p{
+    font-size: large;
+  }
+  
+  .formForgot > button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .formForgot > button:hover {
+    background-color: #45a049;
+  }
+  
+  

@@ -1,0 +1,95 @@
+/* ProductTable.css */
+body {
+  font-family: 'Roboto', sans-serif; /* Modern, clean font */
+}
+
+.table-container {
+  margin: 20px;
+  padding: 10px;
+  background-color: #e8f4f8;  /* Light cool blue background */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 16px;  /* Adjusted font size */
+}
+
+th {
+  background-color: #4e9fcc;  /* Soft teal background */
+  color: #ffffff;  /* White text on header */
+  border: 2px solid #b2d9e4;  /* Light blue border for header */
+  font-weight: 600;  /* Lighter font weight for headers */
+  font-size: 18px;  /* Slightly larger font size for header */
+}
+
+td {
+  background-color: #ffffff;  /* White background for cells */
+  border-bottom: 1px solid #d1e7f3;  /* Light border between rows */
+}
+
+button {
+  font-size: 15px;  /* Adjusted font size */
+  border-radius: 5px;
+  padding: 6px 14px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+/* Styling for action buttons */
+.action-button {
+  margin: 0 10px;
+  text-transform: uppercase;
+  font-weight: 500;  /* Slightly lighter weight for buttons */
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+/* Update Button (Cool Blue) */
+button.MuiButton-containedPrimary {
+  background-color: #38a1db;  /* Cool blue */
+  color: white;
+  font-weight: 500;  /* Lighter weight for update button */
+}
+
+
+button.MuiButton-containedPrimary:hover {
+  background-color: #2e8bb8;  /* Darker blue on hover */
+}
+
+/* Delete Button (Cool Coral) */
+button.MuiButton-containedSecondary {
+  background-color: #f27c7c;  /* Soft coral */
+  color: white;
+  font-weight: 500;  /* Lighter weight for delete button */
+}
+
+button.MuiButton-containedSecondary:hover {
+  background-color: #e15c5c;  /* Darker coral on hover */
+}
+
+/* Style for no data available message */
+.no-data {
+  text-align: center;
+  font-size: 18px;  /* Adjusted font size */
+  color: #757575;
+  font-weight: 600;  /* Bold for emphasis */
+}
+
+/* Loading/Error message style */
+.loading, .error {
+  text-align: center;
+  font-size: 16px;  /* Adjusted font size */
+  font-weight: 500;  /* Lighter font weight */
+  color: #ff6f61; /* Error color for text */
+}
+
