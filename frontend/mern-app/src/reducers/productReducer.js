@@ -34,14 +34,14 @@ export const productReducer = (state = initialState, action) => {
         products: [], 
       };
 
-    case ALL_PRODUCT_SUCCESS:
-      return {
-        loading: false,
-        products: action.payload.product || [], // Default to an empty array if 'product' is undefined
-        totalProduct: action.payload.totalProduct || 0, // Default to 0 if 'totalProduct' is undefined
-        error: null,
-      };
-
+      case ALL_PRODUCT_SUCCESS:
+        return {
+          loading: false,
+          products: action.payload.product || [], // Default to an empty array if 'product' is undefined
+          totalProduct: action.payload.totalProduct || 0, // Default to 0 if 'totalProduct' is undefined
+          productPerPage: action.payload.productPerPage,
+          error: null,
+        };
     case ALL_PRODUCT_FAIL:
       return {
         ...state,

@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 import './navigation.css';
 import { Link } from 'react-router-dom';
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -16,13 +16,13 @@ const Navigation = () => {
 
                 <nav className='navname'>
                     <h3><Link to="/" className='heading'>Home</Link></h3>
-                    <h3><Link to='/category' className='category'>Category</Link></h3>
                     <h3><Link to="/products" className='heading'>Products</Link></h3>
                     <h3> <Link to="/search" className='searchbox'>Search</Link></h3>   
                     <h3><Link to="/about" className='heading'>About</Link></h3>
                     <h3><Link to="/blog" className='heading'>Blog</Link></h3>
                     <h3><Link to="/contacts" className='heading'>Contacts</Link></h3>
-                    <Link to="/signup" className='btn'>Sign Up</Link>
+                    <Link to="/register" className='btn'>Sign Up</Link>
+                    
                     <Link to="/login" className='btn'>Login</Link>
                 </nav>
             </nav>
@@ -31,3 +31,5 @@ const Navigation = () => {
 }
 
 export default Navigation;
+
+

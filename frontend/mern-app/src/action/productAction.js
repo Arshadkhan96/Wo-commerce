@@ -19,12 +19,23 @@ import {
 } from "../constants/productConstant.js";
 
 //PRODUCT DETAIL API
-export const getProduct = (category = '',currentPage=1) => async (dispatch) => {
+export const getProduct = (currentPage = 1, keyword = "", category = "") => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
-    // let link = `http://localhost:5000/api/v1/products?page=${currentPage=1}`
-    let link = `http://localhost:5000/api/v1/products?category=audio&page=${category,currentPage=1}`
+
+    // Dynamically construct API URL
+    let link = `http://localhost:5000/api/v1/products?page=${currentPage}`;
+
+    if (keyword) {
+      link += `&keyword=${keyword}`;
+    }
+
+    if (category) {
+      link += `&category=${category}`;
+    }
+
     const { data } = await axios.get(link);
+
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
@@ -32,11 +43,10 @@ export const getProduct = (category = '',currentPage=1) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ALL_PRODUCT_FAIL,
-      payload: error.response?.data?.message,
+      payload: error.response?.data?.message || "Something went wrong!",
     });
   }
 };
-
 
 
 export const getProductDetail = (id) => async (dispatch) => {
