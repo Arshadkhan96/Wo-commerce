@@ -13,7 +13,7 @@ exports.createProduct = tryCatcherror(async (req, res, next) => {
 });
 
 exports.findAllProduct = tryCatcherror(async (req, res) => {
-  const productPerPage = 5;
+  const productPerPage = 3;
   const totalProduct = await Product.countDocuments();
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
@@ -23,7 +23,8 @@ exports.findAllProduct = tryCatcherror(async (req, res) => {
   res.status(200).json({
     success: true,
     product,
-    totalProduct
+    totalProduct,
+    productPerPage
   });
 });
 
@@ -62,9 +63,7 @@ exports.findProduct = tryCatcherror(async (req, res, next) => {
   });
 });
 
-
-
-///////////////////new apne wali////
+///////////////////new product review////
 
 exports.productReview = tryCatcherror(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
@@ -94,7 +93,6 @@ exports.productReview = tryCatcherror(async (req, res, next) => {
 
   //   // Check if the user already reviewed this product
 
-  // __aayega
   const isReviewed = product.reviews.find(
     (rev) => rev.user.toString() === req.user._id.toString()
   );
