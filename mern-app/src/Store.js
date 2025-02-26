@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { userReducer } from "./reducers/userReducer";
+import { userReducer,profileReducer, forgotPasswordReducer } from "./reducers/userReducer";
 import { productReducer ,productDetailsReducer,newProductReducer, updateProductReducer, } from "./reducers/productReducer";
 
 const reducer = combineReducers({
@@ -11,7 +11,9 @@ const reducer = combineReducers({
   productUpdate:  updateProductReducer,
 
   // userReducer//
-  user: userReducer  
+  user: userReducer ,
+  profile: profileReducer,
+  forgotPassword: forgotPasswordReducer
 });
 
 const initialState = {};
