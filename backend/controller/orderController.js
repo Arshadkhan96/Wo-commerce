@@ -42,21 +42,46 @@ exports.getAllOrders =  tryCatcherror(async (req, res) => {
 });
 
 // Update an order
-exports.updateOrder = tryCatcherror(async (req, res) => {
+// exports.updateOrder = tryCatcherror(async (req, res) => {
+//   try {
+//     const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+//     if (!order)
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Order not found" });
+//     res.status(200).json({ success: true, order });
+//   } catch (error) {
+//     res.status(400).json({ success: false, message: error.message });
+//   }
+// });
+
+exports.updateOrder = async (req, res) => {
   try {
+    // Validate request ID
+    if (!req.params.id) {
+      return res.status(400).json({ success: false, message: "Order ID is required" });
+    }
+
+    // Update order
     const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!order)
-      return res
-        .status(404)
-        .json({ success: false, message: "Order not found" });
+
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
     res.status(200).json({ success: true, order });
+
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    console.error("❌ Error updating order:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
-});
+};
 
 // Delete an order
 exports.deleteOrder = tryCatcherror(async (req, res) => {

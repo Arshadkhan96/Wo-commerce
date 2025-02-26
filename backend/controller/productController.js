@@ -3,7 +3,6 @@ const CatchError = require("../resources/catcherror");
 const tryCatcherror = require("../Middleware/tryCatcherror");
 const ApiFeatures = require("../resources/apiFeatures");
 
-
 exports.createProduct = tryCatcherror(async (req, res, next) => {
   const product = await Product.create(req.body);
   res.status(201).json({

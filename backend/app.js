@@ -15,11 +15,18 @@ app.use(
 
 const product = require("./routes/productRoute")
 const user=require("./routes/userRoute")
-const order =require("./routes/orderRoute")
+const order =require("./routes/orderRoute");
+const fileUpload = require('express-fileupload')
 
 app.use("/api/v1",product);
 app.use("/api/v1",user);
 app.use("/api/v1",order)
+
+
+app.use(fileUpload({
+  useTempFiles:true
+}))
+
 
 //errorMiddleware
 // app.use(errorMiddleware)
@@ -29,4 +36,8 @@ app.use("/api/v1",order)
 //uncaught error
 //exceptional error
 
+
+
 module.exports = app;
+
+
